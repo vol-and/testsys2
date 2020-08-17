@@ -12,10 +12,6 @@ let questionsDB = nano.db.use(dbName);
 server.use(express.static('public'));
 server.use(cors());
 
-console.log(
-    // cors
-);
-
 server.use(parser.json());
 
 nano.db.get(dbName).then(
@@ -46,24 +42,16 @@ server.post('/send', (req, res) => {
     );
 });
 
-
-
-
 let dataArr = [];
-// server.get('/result', (req, res) => {
-    questionsDB.list({include_docs: true}).then(
-        response => {
-            response.rows.forEach(row => {
-                console.log(row.doc);
 
-                // dataArr.push(row.doc);
-                // console.log(dataArr);
-            })
-        }).catch(console.log);
-    // console.log(dataArr);
-    // res.send(dataArr);
-    dataArr = [];
-// });
+questionsDB.list({include_docs: true}).then(
+    response => {
+        response.rows.forEach(row => {
+            console.log(row.doc);
+         })
+     }).catch(console.log);
+dataArr = [];
+
 
 server.listen(port, function () {
     console.log('CORS-enabled web server listening on port 80')
